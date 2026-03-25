@@ -16,5 +16,11 @@ result = (
 
 for dept, salary in result:
     print(dept, salary)
+res=session.query(Department.dept_name,func.count(Employee.id).label("count1"))\
+.join(Employee,Employee.dept_id==Department.id).\
+group_by(Department.dept_name).all()
+
+for name,count1 in res:
+    print(name,count1)
 
 session.close()

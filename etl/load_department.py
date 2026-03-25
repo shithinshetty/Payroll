@@ -4,7 +4,7 @@ from models import Department
 
 session = Session()
 
-with open("../data/departments.csv",newline="") as csvfile:
+with open("data/departments.csv",newline="") as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         exists=session.query(Department).filter_by(dept_name=row['dept_name']).first()
@@ -15,6 +15,13 @@ with open("../data/departments.csv",newline="") as csvfile:
             )
             session.add(department)
 session.commit()
+
+
+# val = session.query(Department).all()
+
+# for i in val:
+#     print(f"{i.dept_name}, {i.location}")
+
 session.close()
 
 import os

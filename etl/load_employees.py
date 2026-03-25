@@ -5,7 +5,7 @@ from csv import DictReader
 
 session =Session()
 
-with open('../data/employees.csv') as csvfile:
+with open('data/employees.csv') as csvfile:
     employees = DictReader(csvfile)
     for row in employees:
         exists=(session.query(Employee).where(Employee.name == row["name"],Employee.joining_date==row["joining_date"])).first()
@@ -21,8 +21,16 @@ with open('../data/employees.csv') as csvfile:
             print("Employees Inserted Successfully")
 
             session.add(emp)
+        
 session.commit()
 
-print(session.query(Employee).all())
+# print(session.query(Employee).all())
+
+# val = session.query(Employee).all()
+
+# for i in val:
+#     print(f"{i.id}, {i.name},{i.joining_date},{i.dept_id}")
+
+
 session.close()
 

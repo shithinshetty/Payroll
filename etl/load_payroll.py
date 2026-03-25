@@ -4,10 +4,11 @@ from models import Salary, Employee
 
 session=Session()
 
-with open('../data/payroll.csv') as csvfile:
+with open('data/payroll.csv') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         exists=(session.query(Salary).where(Salary.month==row['month'],Salary.year==row['year'],(Salary.amount==row['amount'])).first())
+        print(exists)
         emp_exists=(session.query(Employee).where(Employee.name==row['employee_name']).first())
         if not exists and emp_exists:
             payroll=Salary(
